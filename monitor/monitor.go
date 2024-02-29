@@ -53,7 +53,7 @@ func (m *monitor) Start() error {
 	signal.Notify(sigint, os.Interrupt, syscall.SIGTERM)
 	go func() {
 		<-sigint
-		fmt.Println(colorYellow, "\n** Stopping monitor")
+		fmt.Println(colorYellow, "\n** Stopping monitor", colorReset)
 		os.Exit(0)
 	}()
 
