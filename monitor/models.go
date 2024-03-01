@@ -1,12 +1,16 @@
 package monitor
 
-import "time"
+import (
+	"net/http"
+	"time"
+)
 
 type Config struct {
 	Process    string
 	Interval   int
 	NetTimeout time.Duration
 	NetErr     int
+	Transport  *http.Transport
 }
 
 type Status struct {

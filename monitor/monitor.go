@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"net"
 	"net/http"
 	"os"
 	"os/exec"
@@ -32,6 +33,15 @@ type monitor struct {
 }
 
 func NewMonitor(c *Config) *monitor {
+	t := &http.Transport{
+		DisableKeepAlives: true,
+		DialContext: (&net.Dialer{
+			Timeout:   5 * time.Second,
+			KeepAlive: 0,
+		}).DialContext,
+	}
+	c.Transport = t
+
 	return &monitor{
 		config: c,
 		status: &Status{},
@@ -103,7 +113,8 @@ func (m *monitor) killProc() {
 
 func (m *monitor) fetchIp() (string, error) {
 	client := http.Client{
-		Timeout: m.config.NetTimeout * time.Second,
+		Timeout:   m.config.NetTimeout * time.Second,
+		Transport: m.config.Transport,
 	}
 
 	res, err := client.Get(api_url)
