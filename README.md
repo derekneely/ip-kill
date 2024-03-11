@@ -53,3 +53,6 @@ $> ps x | grep transmission
 
 $> ./ip-kill transmission-gtk
 ```
+
+#### Thank you
+Thanks go to ipify.org (https://www.ipify.org/) for supplying the IP this application is using for querying the public IP address.
