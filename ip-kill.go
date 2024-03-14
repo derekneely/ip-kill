@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"githug.com/derekneely/ip-kill/monitor"
+	"github.com/derekneely/ip-kill/monitor"
 )
 
 const (
